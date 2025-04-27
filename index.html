@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassWay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        /* Apply Inter font globally */
+        body { font-family: 'Inter', sans-serif; }
+        /* Simple animation */
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Style for the message box */
+        .message-box { min-height: 1.5rem; transition: opacity 0.3s ease-in-out; }
+        /* Style for active language button */
+        .lang-button.active {
+             font-weight: 700;
+             text-decoration: underline;
+             color: #facc15; /* Yellow-500 */
+        }
+        .lang-button {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .lang-button:hover {
+            color: #fde047; /* Yellow-300 */
+        }
+        /* Logo text styling */
+        .logo-text {
+            font-family: 'Righteous', cursive; /* Apply the Righteous font */
+            font-size: 1.75rem; /* Smaller size */
+            line-height: 1;
+            color: white;
+            letter-spacing: 0.05em;
+        }
+        /* Responsive logo size */
+        @media (min-width: 768px) {
+            .logo-text {
+                font-size: 2.25rem; /* Slightly larger on medium screens and up */
+            }
+        }
+        /* Ensure header container allows for top alignment */
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center main content */
+            position: relative; /* Needed for absolute positioning of lang switcher */
+            padding-top: 2.5rem; /* Add padding to make space for logo/switcher */
+        }
+        .header-top-row {
+            display: flex;
+            justify-content: space-between; /* Pushes logo left, switcher right */
+            align-items: center; /* Vertically center items in the top row */
+            width: 100%;
+            position: absolute; /* Position it above the main content */
+            top: 0.5rem; /* Position from the top */
+            left: 0;
+            padding: 0 1.5rem; /* Match container padding */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="relative bg-gradient-to-r from-blue-600 to-indigo-700 text-white pt-16 pb-12 md:pt-24 md:pb-20 fade-in">
+        <div class="container mx-auto px-6 header-container max-w-4xl">
+            <div class="header-top-row">
+                <div class="logo-text">PassWay</div>
+                <div class="text-sm z-10">
+                    <span id="lang-en" class="lang-button active" onclick="setLanguage('en')">ENG</span> |
+                    <span id="lang-pt" class="lang-button" onclick="setLanguage('pt')">PT</span>
+                </div>
+            </div>
+
+            <div class="text-center mt-16 md:mt-20">
+                <h1 data-key="heroTitle" class="text-4xl md:text-5xl font-bold mb-4">Stop Guessing, Start Traveling</h1>
+                <p data-key="heroSubtitle" class="text-lg md:text-xl text-indigo-100">Confused about visa rules and entry requirements? Get clear, personalized information based on your passport before you book.</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 data-key="howTitle" class="text-3xl font-bold text-gray-800 mb-12">Travel Planning Made Simple</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="p-6 bg-gray-100 rounded-lg shadow-sm text-left md:text-center">
+                    <img src="https://placehold.co/80x80/3b82f6/ffffff?text=1" alt="Step 1 Icon" class="mx-auto mb-4 rounded-full" onerror="this.style.display='none'; this.onerror=null;">
+                    <h3 data-key="step1Title" class="text-xl font-semibold text-gray-700 mb-2">Enter Your Passport</h3>
+                    <p data-key="step1Desc" class="text-gray-600">Select your country of citizenship to personalize the requirements.</p>
+                </div>
+                <div class="p-6 bg-gray-100 rounded-lg shadow-sm text-left md:text-center">
+                     <img src="https://placehold.co/80x80/10b981/ffffff?text=2" alt="Step 2 Icon" class="mx-auto mb-4 rounded-full" onerror="this.style.display='none'; this.onerror=null;">
+                    <h3 data-key="step2Title" class="text-xl font-semibold text-gray-700 mb-2">Choose Your Destination</h3>
+                    <p data-key="step2Desc" class="text-gray-600">Pick the country you're planning to visit.</p>
+                </div>
+                <div class="p-6 bg-gray-100 rounded-lg shadow-sm text-left md:text-center">
+                    <img src="https://placehold.co/80x80/f59e0b/ffffff?text=3" alt="Step 3 Icon" class="mx-auto mb-4 rounded-full" onerror="this.style.display='none'; this.onerror=null;">
+                    <h3 data-key="step3Title" class="text-xl font-semibold text-gray-700 mb-2">Get Instant Clarity</h3>
+                    <p data-key="step3Desc" class="text-gray-600">Receive up-to-date, easy-to-understand visa, health, and document needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="example-section" class="pb-16 md:pb-20 pt-8 bg-white"> <div class="container mx-auto px-6">
+            <h2 data-key="exampleTitle" class="text-3xl font-bold text-gray-800 mb-12 text-center">See How It Works (Example)</h2>
+            <div class="max-w-3xl mx-auto bg-gray-50 p-6 md:p-8 rounded-lg shadow-md border border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label for="passport-example" data-key="examplePassportLabel" class="block text-sm font-medium text-gray-700 mb-1">Your Passport Country</label>
+                        <select id="passport-example" class="w-full p-3 border border-gray-300 rounded-md bg-gray-200 text-gray-500 cursor-not-allowed" disabled>
+                            <option data-key="examplePassportOption">e.g., Brazil</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="destination-example" data-key="exampleDestinationLabel" class="block text-sm font-medium text-gray-700 mb-1">Your Destination</label>
+                         <select id="destination-example" class="w-full p-3 border border-gray-300 rounded-md bg-gray-200 text-gray-500 cursor-not-allowed" disabled>
+                            <option data-key="exampleDestinationOption">e.g., Portugal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h4 class="text-xl font-semibold text-gray-700 mb-4 text-center md:text-left" data-key="exampleResultsTitle">Example Results:</h4>
+                <div class="space-y-6">
+                    <div class="border border-blue-200 bg-blue-50 p-4 rounded-md shadow-sm">
+                        <h5 data-key="exampleVisaTitle" class="text-lg font-semibold text-blue-800 mb-2">Visa Requirements</h5>
+                        <p data-key="exampleVisaDesc" class="text-blue-700">No visa required for stays up to 90 days within a 180-day period (Schengen Area rules apply). Passport must be valid for at least 3 months beyond intended departure.</p>
+                    </div>
+                    <div class="border border-green-200 bg-green-50 p-4 rounded-md shadow-sm">
+                        <h5 data-key="exampleVaccineTitle" class="text-lg font-semibold text-green-800 mb-2">Health & Vaccines</h5>
+                        <p data-key="exampleVaccineDesc" class="text-green-700">No specific vaccine requirements for entry from Brazil. Standard recommended vaccinations advised. Consider travel health insurance.</p>
+                    </div>
+                    <div class="border border-yellow-200 bg-yellow-50 p-4 rounded-md shadow-sm">
+                        <h5 data-key="exampleDocsTitle" class="text-lg font-semibold text-yellow-800 mb-2">Other Documents</h5>
+                        <p data-key="exampleDocsDesc" class="text-yellow-700">Proof of sufficient funds and accommodation may be requested. Return or onward ticket might be checked.</p>
+                    </div>
+                </div>
+                 <p data-key="exampleDisclaimer" class="mt-6 text-xs text-gray-500 text-center">Note: This is a simplified example for illustrative purposes only. Actual requirements depend on specific dates and circumstances.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-r from-indigo-700 to-blue-600 text-white py-16 md:py-20">
+         <div class="container mx-auto px-6 text-center max-w-2xl">
+             <h2 data-key="formTitle" class="text-3xl font-bold mb-4">Be the First to Know!</h2>
+             <p data-key="formSubtitle" class="text-lg text-indigo-100 mb-8">Enter your email to get notified when PassWay launches and receive early access to simplified travel planning.</p>
+             <form id="signup-form" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+                 <input
+                     type="email"
+                     id="email"
+                     name="email"
+                     data-key-placeholder="formPlaceholder"
+                     placeholder="your.email@example.com"
+                     required
+                     class="flex-grow px-4 py-3 rounded-md border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                 >
+                 <button
+                     type="submit"
+                     data-key="formButton"
+                     class="bg-yellow-400 hover:bg-yellow-500 text-indigo-800 font-bold py-3 px-6 rounded-md transition duration-300 ease-in-out transform hover:scale-105 whitespace-nowrap"
+                 >
+                     Notify Me!
+                 </button>
+             </form>
+             <p id="form-message" class="mt-4 text-sm message-box text-yellow-200"></p> </div>
+    </section>
+
+
+    <footer class="bg-gray-800 text-gray-400 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <span id="current-year"></span> PassWay (<span data-key="footerComingSoon">Coming Soon!</span>). <span data-key="footerRights">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Translations ---
+        const translations = {
+            en: {
+                pageTitle: "PassWay - Know Your Entry Requirements Instantly",
+                heroTitle: "Stop Guessing, Start Traveling",
+                heroSubtitle: "Confused about visa rules and entry requirements? Get clear, personalized information based on your passport before you book.",
+                formTitle: "Be the First to Know!",
+                formSubtitle: "Enter your email to get notified when PassWay launches and receive early access to simplified travel planning.",
+                formPlaceholder: "your.email@example.com",
+                formButton: "Notify Me!",
+                howTitle: "Travel Planning Made Simple",
+                step1Title: "Enter Your Passport",
+                step1Desc: "Select your country of citizenship to personalize the requirements.",
+                step2Title: "Choose Your Destination",
+                step2Desc: "Pick the country you're planning to visit.",
+                step3Title: "Get Instant Clarity",
+                step3Desc: "Receive up-to-date, easy-to-understand visa, health, and document needs.",
+                exampleTitle: "See How It Works (Example)",
+                exampleResultsTitle: "Example Results:",
+                examplePassportLabel: "Your Passport Country",
+                examplePassportOption: "e.g., Brazil",
+                exampleDestinationLabel: "Your Destination",
+                exampleDestinationOption: "e.g., Portugal",
+                exampleVisaTitle: "Visa Requirements",
+                exampleVisaDesc: "No visa required for stays up to 90 days within a 180-day period (Schengen Area rules apply). Passport must be valid for at least 3 months beyond intended departure.",
+                exampleVaccineTitle: "Health & Vaccines",
+                exampleVaccineDesc: "No specific vaccine requirements for entry from Brazil. Standard recommended vaccinations advised. Consider travel health insurance.",
+                exampleDocsTitle: "Other Documents",
+                exampleDocsDesc: "Proof of sufficient funds and accommodation may be requested. Return or onward ticket might be checked.",
+                exampleDisclaimer: "Note: This is a simplified example for illustrative purposes only. Actual requirements depend on specific dates and circumstances.",
+                footerComingSoon: "Coming Soon!",
+                footerRights: "All rights reserved.",
+                formSuccess: "Thank you! We'll notify {email} when we launch.",
+                formError: "Please enter a valid email address."
+            },
+            pt: {
+                pageTitle: "PassWay - Saiba Seus Requisitos de Entrada Instantaneamente",
+                heroTitle: "Pare de Adivinhar, Comece a Viajar",
+                heroSubtitle: "Confuso sobre regras de visto e requisitos de entrada? Obtenha informações claras e personalizadas com base no seu passaporte antes de reservar.",
+                formTitle: "Seja o Primeiro a Saber!",
+                formSubtitle: "Digite seu e-mail para ser notificado quando o PassWay for lançado e receber acesso antecipado ao planejamento de viagens simplificado.",
+                formPlaceholder: "seu.email@exemplo.com",
+                formButton: "Notifique-me!",
+                howTitle: "Planejamento de Viagem Simplificado",
+                step1Title: "Informe Seu Passaporte",
+                step1Desc: "Selecione seu país de cidadania para personalizar os requisitos.",
+                step2Title: "Escolha Seu Destino",
+                step2Desc: "Selecione o país que você planeja visitar.",
+                step3Title: "Obtenha Clareza Instantânea",
+                step3Desc: "Receba informações atualizadas e fáceis de entender sobre visto, saúde e documentos necessários.",
+                exampleTitle: "Veja Como Funciona (Exemplo)",
+                exampleResultsTitle: "Resultados Exemplo:",
+                examplePassportLabel: "País do Seu Passaporte",
+                examplePassportOption: "ex: Brasil",
+                exampleDestinationLabel: "Seu Destino",
+                exampleDestinationOption: "ex: Portugal",
+                exampleVisaTitle: "Requisitos de Visto",
+                exampleVisaDesc: "Visto não exigido para estadias de até 90 dias dentro de um período de 180 dias (regras do Espaço Schengen se aplicam). Passaporte deve ser válido por pelo menos 3 meses após a partida pretendida.",
+                exampleVaccineTitle: "Saúde e Vacinas",
+                exampleVaccineDesc: "Nenhuma exigência específica de vacina para entrada do Brasil. Vacinas padrão recomendadas são aconselhadas. Considere seguro saúde de viagem.",
+                exampleDocsTitle: "Outros Documentos",
+                exampleDocsDesc: "Comprovante de fundos suficientes e acomodação podem ser solicitados. Passagem de volta ou de continuação pode ser verificada.",
+                exampleDisclaimer: "Nota: Este é um exemplo simplificado apenas para fins ilustrativos. Os requisitos reais dependem de datas e circunstâncias específicas.",
+                footerComingSoon: "Em Breve!",
+                footerRights: "Todos os direitos reservados.",
+                formSuccess: "Obrigado! Notificaremos {email} quando lançarmos.",
+                formError: "Por favor, insira um endereço de e-mail válido."
+            }
+        };
+
+        let currentLang = 'en'; // Default language
+
+        // --- Elements Cache ---
+        const elementsToTranslate = document.querySelectorAll('[data-key]');
+        const placeholdersToTranslate = document.querySelectorAll('[data-key-placeholder]');
+        const langButtons = document.querySelectorAll('.lang-button');
+        const form = document.getElementById('signup-form');
+        const messageElement = document.getElementById('form-message');
+        const emailInput = document.getElementById('email');
+
+        // --- Language Switching Function ---
+        function setLanguage(lang) {
+            if (!translations[lang] || lang === currentLang) return;
+            currentLang = lang;
+
+            // Update page title
+            document.title = translations[lang].pageTitle;
+
+            // Update text content
+            elementsToTranslate.forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang][key] !== undefined) {
+                    element.textContent = translations[lang][key];
+                } else {
+                    console.warn(`Translation key "${key}" not found for language "${lang}"`);
+                }
+            });
+
+             // Update placeholders
+             placeholdersToTranslate.forEach(element => {
+                const key = element.getAttribute('data-key-placeholder');
+                 if (translations[lang][key] !== undefined) {
+                    element.placeholder = translations[lang][key];
+                } else {
+                     console.warn(`Placeholder key "${key}" not found for language "${lang}"`);
+                }
+            });
+
+            // Update active language button style
+            langButtons.forEach(button => {
+                button.classList.remove('active');
+                if (button.id === `lang-${lang}`) {
+                    button.classList.add('active');
+                }
+            });
+
+             // Clear form message
+             messageElement.textContent = '';
+             messageElement.style.opacity = '0';
+        }
+
+        // --- Initial Setup ---
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        setLanguage(currentLang);
+
+        // --- Form Handling ---
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                if (emailInput.value && emailInput.checkValidity()) {
+                    // --- IMPORTANT: Integrate real email collection here ---
+                    // Example: Replace the lines below with Formspree integration or similar
+                    const successMsg = translations[currentLang].formSuccess.replace('{email}', emailInput.value);
+                    messageElement.textContent = successMsg;
+                    messageElement.style.color = '#a7f3d0'; // Light green for success
+                    messageElement.style.opacity = '1';
+                    emailInput.value = '';
+                    // --- End of example ---
+                } else {
+                    messageElement.textContent = translations[currentLang].formError;
+                    messageElement.style.color = '#fecaca'; // Light red for error
+                    messageElement.style.opacity = '1';
+                }
+
+                // Hide message after timeout
+                setTimeout(() => {
+                     messageElement.style.opacity = '0';
+                     // Clear text after fade out for clean state
+                     setTimeout(() => { messageElement.textContent = ''; }, 300);
+                }, 5000); // 5 seconds
+            });
+        } else {
+            console.error("Signup form not found.");
+        }
+
+    </script>
+
+</body>
+</html>
